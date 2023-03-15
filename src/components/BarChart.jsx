@@ -16,9 +16,11 @@ const BarChart = ({ data }) => {
   
   return <div className="barchart">
     <svg width={width} height={height}>
-      {data.map(d => {
+      {data.map((d, i) => {
         return <rect
+          key={i}
           x={xScale(d.name)}
+          // .attr("x", d => xScale(d.name))
           y={yScale(d.value)}
           width={xScale.bandwidth()}
           height={height - yScale(d.value)}

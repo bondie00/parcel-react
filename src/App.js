@@ -1,5 +1,5 @@
 import BarChart from "./components/BarChart";
-import Counter from "./components/counter";
+import Counter from "./components/Counter";
 
 const data = [
   { name: "running", value: 730 },
@@ -12,7 +12,9 @@ const data = [
 export function App() {
   return <>
     <h1>Hello world!</h1>
-    <Counter initialValue={3}/>
+    <Counter
+      initialValue={3}
+    />
     <BarChart data={data}/>
   </>;
 }
