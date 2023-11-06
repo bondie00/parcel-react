@@ -1,0 +1,186 @@
+[
+    {
+      "Key": "1",
+      "FilmTitle": "10",
+      "AlternateTitle": "",
+      "Year": "1979",
+      "Director": "Blake Edwards",
+      "DirectorArray": [
+        "Blake Edwards"
+      ],
+      "Country": "United States",
+      "CountryArr": [
+        "United States"
+      ],
+      "1952rank": "--",
+      "1952votes": "0",
+      "1962rank": "--",
+      "1962votes": "0",
+      "1972rank": "--",
+      "1972votes": "0",
+      "1982rank": "--",
+      "1982votes": "0",
+      "1992rank": "--",
+      "1992votes": "0",
+      "2002rank": "--",
+      "2002votes": "0",
+      "2012rank": "--",
+      "2012votes": "0",
+      "2022rank": "1514",
+      "2022votes": "1"
+    },
+    {
+      "Key": "2",
+      "FilmTitle": "322",
+      "AlternateTitle": "",
+      "Year": "1969",
+      "Director": "Dušan Hanák",
+      "DirectorArray": [
+        "Dušan Hanák"
+      ],
+      "Country": "Czechoslovakia",
+      "CountryArr": [
+        "Czechoslovakia"
+      ],
+      "1952rank": "--",
+      "1952votes": "0",
+      "1962rank": "--",
+      "1962votes": "0",
+      "1972rank": "--",
+      "1972votes": "0",
+      "1982rank": "--",
+      "1982votes": "0",
+      "1992rank": "--",
+      "1992votes": "0",
+      "2002rank": "--",
+      "2002votes": "0",
+      "2012rank": "--",
+      "2012votes": "0",
+      "2022rank": "1514",
+      "2022votes": "1"
+    },
+    {
+      "Key": "3",
+      "FilmTitle": "1900",
+      "AlternateTitle": "Novecento",
+      "Year": "1976",
+      "Director": "Bernardo Bertolucci",
+      "DirectorArray": [
+        "Bernardo Bertolucci"
+      ],
+      "Country": "Italy, France",
+      "CountryArr": [
+        "Italy",
+        "France"
+      ],
+      "1952rank": "--",
+      "1952votes": "0",
+      "1962rank": "--",
+      "1962votes": "0",
+      "1972rank": "--",
+      "1972votes": "0",
+      "1982rank": "78",
+      "1982votes": "3",
+      "1992rank": "--",
+      "1992votes": "0",
+      "2002rank": "228",
+      "2002votes": "1",
+      "2012rank": "891",
+      "2012votes": "1",
+      "2022rank": "752",
+      "2022votes": "3"
+    },
+    {
+      "Key": "4",
+      "FilmTitle": "1917",
+      "AlternateTitle": "",
+      "Year": "2019",
+      "Director": "Sam Mendes",
+      "DirectorArray": [
+        "Sam Mendes"
+      ],
+      "Country": "United States, United Kingdom",
+      "CountryArr": [
+        "United States",
+        "United Kingdom"
+      ],
+      "1952rank": "--",
+      "1952votes": "0",
+      "1962rank": "--",
+      "1962votes": "0",
+      "1972rank": "--",
+      "1972votes": "0",
+      "1982rank": "--",
+      "1982votes": "0",
+      "1992rank": "--",
+      "1992votes": "0",
+      "2002rank": "--",
+      "2002votes": "0",
+      "2012rank": "--",
+      "2012votes": "0",
+      "2022rank": "1514",
+      "2022votes": "1"
+    },
+    {
+      "Key": "5",
+      "FilmTitle": "2046",
+      "AlternateTitle": "",
+      "Year": "2004",
+      "Director": "Wong Kar Wai",
+      "DirectorArray": [
+        "Wong Kar Wai"
+      ],
+      "Country": "Hong Kong",
+      "CountryArr": [
+        "Hong Kong"
+      ],
+      "1952rank": "--",
+      "1952votes": "0",
+      "1962rank": "--",
+      "1962votes": "0",
+      "1972rank": "--",
+      "1972votes": "0",
+      "1982rank": "--",
+      "1982votes": "0",
+      "1992rank": "--",
+      "1992votes": "0",
+      "2002rank": "--",
+      "2002votes": "0",
+      "2012rank": "448",
+      "2012votes": "3",
+      "2022rank": "997",
+      "2022votes": "2"
+    },
+    {
+      "Key": "6",
+      "FilmTitle": "¡Que viva Mexico!",
+      "AlternateTitle": "",
+      "Year": "1932",
+      "Director": "Sergei Eisenstein, Grigori Aleksandrov",
+      "DirectorArray": [
+        "Sergei Eisenstein",
+        "Grigori Aleksandrov"
+      ],
+      "Country": "Soviet Union, United States",
+      "CountryArr": [
+        "Soviet Union",
+        "United States"
+      ],
+      "1952rank": "16",
+      "1952votes": "8",
+      "1962rank": "47",
+      "1962votes": "2",
+      "1972rank": "--",
+      "1972votes": "0",
+      "1982rank": "--",
+      "1982votes": "0",
+      "1992rank": "--",
+      "1992votes": "0",
+      "2002rank": "--",
+      "2002votes": "0",
+      "2012rank": "--",
+      "2012votes": "0",
+      "2022rank": "--",
+      "2022votes": "0"
+    }
+]

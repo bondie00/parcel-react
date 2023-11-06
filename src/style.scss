@@ -1,18 +1,43 @@
 body {
-  font-family: Arial;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:8pt;
 }
-
-$white: #FFF;
-$blue: #7b9fe3;
-$squareCount: 4;
 
 #app {
   max-width: 50%;
   margin: auto;
 }
 
-.counter {
-  button {
-    color: $blue;
-  }
+#title {
+  font-weight: bold;
+  font-size: 24pt;
+}
+
+#alttitle {
+  font-size: 12pt;
+}
+
+#secondary {
+  font-size: 12pt;
+}
+
+.bolded {
+  font-weight: bold;
+}
+
+#pollyear {
+  text-anchor: right;
+}
+
+#votes {
+  text-anchor: right;
+  font-weight: bold;
+}
+
+#rank {
+  font-size: 12pt;
+}
+
+#rankNum {
+  font-size: 21pt;
 }
