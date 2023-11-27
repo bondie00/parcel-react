@@ -1,43 +1,104 @@
 import FilmSlide from "./components/FilmSlide";
 import React, { useState } from "react";
 import data from "./components/filmdata.json";
+import Pagination from "./components/pagination";
 
 
 export function App() {
 
+  const [filters, setFilters] = useState([])
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesperPage] = useState(25);
+  const [toggled, setToggled] = useState([])
+
+  const toggle = (active) => {
+    setToggled(
+      active === toggled ? null : active
+    )
+  }
+
+  const filteredData = data.filter((node) =>
+    filters.length > 0
+    ? filters.some((filter) =>
+      node.CountryArr.includes(filter)
+      )
+    : data
+  )
+
+const filterCountry = data.filter(node => {
+  filters.length > 0
+    ? filters.some((check) =>
+      node.CountryArr.includes(check)
+      )
+    : data
+})
+
+
+  const filterHandler = (event) => {
+    if (event.target.checked) {
+      setFilters([...filters, event.target.value])
+    } else {
+      setFilters(
+        filters.filter((check) => check !== event.target.value)
+      )
+    }
+  }
+
+  const indexLast = currentPage * moviesperPage
+  const indexFirst = indexLast - moviesperPage
+  const indexCurrent = filteredData.slice(indexFirst, indexLast)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
   return <>
-  {data.map(data => (
-    <svg id="filmslide" height="250" width="650">
-      <text id = "title" x="50" y="40">{data.FilmTitle}</text>
-      <text id = "alttitle" x="50" y="60">{data.AlternateTitle}</text>
-      <text id = "secondary" x="50" y="100">Directed by {data.Director}</text>
-      <text id = "secondary" x="50" y="120">{data.Country}, {data.Year}</text>
-      <text id = "pollyear" x = "50" y = "230">2022</text>
-      <text id = "rank" x = "50" y = "190"># {data["2022rank"]}</text>
-      <text id = "votes" x = "50" y = "210">{data["2022votes"] + " vote(s)"}</text>
-      <text id = "pollyear" x = "125" y = "230">2012</text>
-      <text id = "rank"x = "125" y = "190"># {data["2012rank"]}</text>
-      <text id = "votes" x = "125" y = "210">{data["2012votes"] + " vote(s)"}</text>
-      <text id = "pollyear" x = "200" y = "230">2002</text>
-      <text id = "rank" x = "200" y = "190"># {data["2002rank"]}</text>
-      <text id = "votes" x = "200" y = "210">{data["2002votes"] + " vote(s)"}</text>
-      <text id = "pollyear" x = "275" y = "230">1992</text>
-      <text id = "rank" x = "275" y = "190"># {data["1992rank"]}</text>
-      <text id = "votes" x = "275" y = "210">{data["1992votes"] + " vote(s)"}</text>
-      <text id = "pollyear" x = "350" y = "230">1982</text>
-      <text id = "rank" x = "350" y = "190"># {data["1982rank"]}</text>
-      <text id = "votes" x = "350" y = "210">{data["1982votes"] + " vote(s)"}</text>
-      <text id = "pollyear" x = "425" y = "230">1972</text>
-      <text id = "rank" x = "425" y = "190"># {data["1972rank"]}</text>
-      <text id = "votes" x = "425" y = "210">{data["1972votes"] + " vote(s)"}</text>
-      <text id = "pollyear" x = "500" y = "230">1962</text>
-      <text id = "rank" x = "500" y = "190"># {data["1962rank"]}</text>
-      <text id = "votes" x = "500" y = "210">{data["1962votes"] + " vote(s)"}</text>
-      <text id = "pollyear" x = "575" y = "230">1952</text>
-      <text id = "rank" x = "575" y = "190">#{data["1952votes"]==0 ? " --" : data["1952votes"]}</text>
-      <text id = "votes" x = "575" y = "210">{data["1952votes"] + " vote(s)"}</text>
-      <rect width="650" height="250" fill="none" stroke="black" strokeWidth="3px"></rect>
-    </svg>
-  ))}
-  </>;
+      <header>
+
+      </header>
+      <div class="main">
+
+        <Pagination 
+          moviesperPage={moviesperPage} 
+          totalMovies={filteredData.length} 
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+
+        <div class="workarea">
+          <div class="filters">
+            <div class="toggle-poll-year" onClick={() => toggle(1)}>
+              Poll Year
+            </div>
+            <div class="content">
+              some content
+            </div>
+          </div>
+          <div class="films-container">
+          {indexCurrent.map((d) => (
+            <FilmSlide 
+            d={d} 
+            />
+          ))}
+          </div>
+        </div>
+
+        <Pagination 
+          moviesperPage={moviesperPage} 
+          totalMovies={filteredData.length} 
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+
+      </div>
+      <footer>
+        
+      </footer>
+
+    <div>
+      <input type="checkbox" id="united states" onChange={filterHandler} value="United States"/>
+      <label for="united states">United States</label>
+      <input type="checkbox" id="czechoslovakia" onChange={filterHandler} value="Czechoslovakia"/>
+      <label for="czechoslovakia">Czechoslovakia</label>
+    </div>
+
+    </>
 }
