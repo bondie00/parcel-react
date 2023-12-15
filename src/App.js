@@ -1,60 +1,87 @@
-import FilmSlide from "./components/FilmSlide";
-import React, { useState } from "react";
-import data from "./components/filmdata.json";
-import Pagination from "./components/pagination";
+import FilmSlide from "./components/FilmSlide"
+import React, { useState } from "react"
+import data from "./components/filmdata.json"
+import Pagination from "./components/pagination"
+import Filters from "./components/Filters"
 
 
 export function App() {
 
-  const [filters, setFilters] = useState([])
-  const [currentPage, setCurrentPage] = useState(1);
-  const [moviesperPage] = useState(25);
-  const [toggled, setToggled] = useState([])
+  
+  const [currentPage, setCurrentPage] = useState(1)
+  const [moviesperPage] = useState(25)
+  const [countryFilters, setCountryFilters] = useState([])
+  const [decadeFilters, setDecadeFilters] = useState([])
+  const [directorFilters, setDirectorFilters] = useState([])
+  const [apply, setApply] =useState(0)
 
-  const toggle = (active) => {
-    setToggled(
-      active === toggled ? null : active
-    )
+  let nextState = {
+    country: countryFilters,
+    decade: decadeFilters,
+    director: directorFilters,
+    title: []
   }
 
-  const filteredData = data.filter((node) =>
-    filters.length > 0
-    ? filters.some((filter) =>
-      node.CountryArr.includes(filter)
-      )
-    : data
-  )
+  console.log("nextstate.director", nextState.director)
 
-const filterCountry = data.filter(node => {
-  filters.length > 0
-    ? filters.some((check) =>
-      node.CountryArr.includes(check)
-      )
-    : data
+  console.log("director Filters", directorFilters)
+
+  let filteredData = data.filter((node) => {
+    let couFlag = false
+    let decFlag = false
+    let dirFlag = false
+    let titFlag = false
+
+      countryFilters.some((filter) => {
+        if (node.CountryArr.includes(filter))
+          couFlag = true
+      })
+
+      decadeFilters.some((filter) => {
+        if (node.Year.substring(0,3) == filter)
+          decFlag = true
+      })
+
+      directorFilters.some((filter) => {
+        if (node.DirectorArray.includes(filter))
+          dirFlag = true
+      })
+
+    if (countryFilters.length > 0 && decadeFilters.length > 0 && directorFilters.length > 0)
+      return (couFlag && decFlag && dirFlag)
+    if (countryFilters.length > 0 && decadeFilters.length > 0)
+      return (couFlag && decFlag)
+    if (countryFilters.length > 0 && directorFilters.length > 0)
+      return (couFlag && dirFlag)
+    if (decadeFilters.length > 0 && directorFilters.length > 0)
+      return (decFlag && dirFlag)
+    if (countryFilters.length > 0)
+      return couFlag
+    if (decadeFilters.length > 0)
+      return decFlag
+    if (directorFilters.length > 0)
+      return dirFlag    
+    return data
 })
 
+function applyClick() {
+  setCountryFilters(nextState.country)
+  setDecadeFilters(nextState.decade)
+  setDirectorFilters(nextState.director)
+  setApply(apply + 1)
+}
 
-  const filterHandler = (event) => {
-    if (event.target.checked) {
-      setFilters([...filters, event.target.value])
-    } else {
-      setFilters(
-        filters.filter((check) => check !== event.target.value)
-      )
-    }
-  }
+const indexLast = currentPage * moviesperPage
+const indexFirst = indexLast - moviesperPage
+let indexCurrent = filteredData.slice(indexFirst, indexLast)
 
-  const indexLast = currentPage * moviesperPage
-  const indexFirst = indexLast - moviesperPage
-  const indexCurrent = filteredData.slice(indexFirst, indexLast)
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return <>
       <header>
 
       </header>
-      <div class="main">
+      <div className="main">
 
         <Pagination 
           moviesperPage={moviesperPage} 
@@ -63,19 +90,19 @@ const filterCountry = data.filter(node => {
           currentPage={currentPage}
         />
 
-        <div class="workarea">
-          <div class="filters">
-            <div class="toggle-poll-year" onClick={() => toggle(1)}>
-              Poll Year
-            </div>
-            <div class="content">
-              some content
-            </div>
+        <div className="workarea">
+          <div className="filters">
+          <Filters
+          data={data}
+          nextState={nextState}
+          />
+               <div type="button" onClick={() => applyClick()}>Apply Filters</div>
           </div>
-          <div class="films-container">
+          
+          <div className="films-container">
           {indexCurrent.map((d) => (
             <FilmSlide 
-            d={d} 
+            d={d}
             />
           ))}
           </div>
@@ -92,13 +119,5 @@ const filterCountry = data.filter(node => {
       <footer>
         
       </footer>
-
-    <div>
-      <input type="checkbox" id="united states" onChange={filterHandler} value="United States"/>
-      <label for="united states">United States</label>
-      <input type="checkbox" id="czechoslovakia" onChange={filterHandler} value="Czechoslovakia"/>
-      <label for="czechoslovakia">Czechoslovakia</label>
-    </div>
-
     </>
 }

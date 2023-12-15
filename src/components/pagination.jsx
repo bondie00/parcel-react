@@ -38,21 +38,21 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
     if (pageNumbers.length < 10) {
         return (
             <nav>
-                <div class="pagination">
+                <div className="pagination">
                     {currentPage > 1 &&
-                        <button type="button" class="pageitem" onClick={() => paginate(currentPage - 1)}>
+                        <button type="button" className="pageitem" onClick={() => paginate(currentPage - 1)}>
                         previous
                         </button>
                     }
                     
                     {pageNumbers.map(number => (
-                        <button type="button" key={number} class="pageitem" onClick={() => paginate(number)} href="!#">
+                        <button type="button" key={number} className="pageitem" onClick={() => paginate(number)} href="!#">
                         {number}
                         </button>
                     ))}
 
                     {currentPage != pageNumbers[pageNumbers.length - 1] &&
-                        <button type="button" class="pageitem" onClick={() => paginate(currentPage + 1)}>
+                        <button type="button" className="pageitem" onClick={() => paginate(currentPage + 1)}>
                         next
                         </button>
                     } 
@@ -65,30 +65,30 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
         if (currentPage <= 6) {
             return (
                 <nav>
-                    <div class="pagination">
+                    <div className="pagination">
                         {currentPage > 1 &&
-                            <button type="button" class="pageitem" onClick={() => paginate(currentPage - 1)}>
+                            <button type="button" className="pageitem" onClick={() => paginate(currentPage - 1)}>
                             previous
                             </button>
                         }
     
                         {displayNumbers.map(number => (
-                            <button type="button" key={number} class="pageitem" onClick={() => paginate(number)} href="!#">
+                            <button type="button" key={number} className="pageitem" onClick={() => paginate(number)} href="!#">
                                     {number}
                             </button>
                         ))}
     
                         <div>...</div>
     
-                        <button type="button" key={pageNumbers[pageNumbers.length - 2]} class="pageitem" onClick={() => paginate(pageNumbers[pageNumbers.length - 2])} href="!#">
+                        <button type="button" key={pageNumbers[pageNumbers.length - 2]} className="pageitem" onClick={() => paginate(pageNumbers[pageNumbers.length - 2])} href="!#">
                                     {pageNumbers[pageNumbers.length - 2]}
                         </button>
-                        <button type="button" key={pageNumbers[pageNumbers.length - 1]} class="pageitem" onClick={() => paginate(pageNumbers[pageNumbers.length - 1])} href="!#">
+                        <button type="button" key={pageNumbers[pageNumbers.length - 1]} className="pageitem" onClick={() => paginate(pageNumbers[pageNumbers.length - 1])} href="!#">
                                     {pageNumbers[pageNumbers.length - 1]}
                         </button>
     
                         {currentPage != pageNumbers[pageNumbers.length - 1] &&
-                            <button type="button" class="pageitem" onClick={() => paginate(currentPage + 1)}>
+                            <button type="button" className="pageitem" onClick={() => paginate(currentPage + 1)}>
                             next
                             </button>
                         } 
@@ -100,39 +100,39 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
         if (currentPage >= 7 && currentPage <= pageNumbers.length - 6) {
             return (
                 <nav>
-                    <div class="pagination">
+                    <div className="pagination">
                         {currentPage > 1 &&
-                            <button type="button" class="pageitem" onClick={() => paginate(currentPage - 1)}>
+                            <button type="button" className="pageitem" onClick={() => paginate(currentPage - 1)}>
                             previous
                             </button>
                         }
                         
-                        <button type="button" key={pageNumbers[0]} class="pageitem" onClick={() => paginate(pageNumbers[0])} href="!#">
+                        <button type="button" key={pageNumbers[0]} className="pageitem" onClick={() => paginate(pageNumbers[0])} href="!#">
                         {pageNumbers[0]}
                         </button>
-                        <button type="button" key={pageNumbers[1]} class="pageitem" onClick={() => paginate(pageNumbers[1])} href="!#">
+                        <button type="button" key={pageNumbers[1]} className="pageitem" onClick={() => paginate(pageNumbers[1])} href="!#">
                         {pageNumbers[1]}
                         </button>
 
                         <div>...</div>
     
                         {displayNumbers.map(number => (
-                            <button type="button" key={number} class="pageitem" onClick={() => paginate(number)} href="!#">
+                            <button type="button" key={number} className="pageitem" onClick={() => paginate(number)} href="!#">
                                     {number}
                             </button>
                         ))}
     
                         <div>...</div>
     
-                        <button type="button" key={pageNumbers[pageNumbers.length - 2]} class="pageitem" onClick={() => paginate(pageNumbers[pageNumbers.length - 2])} href="!#">
+                        <button type="button" key={pageNumbers[pageNumbers.length - 2]} className="pageitem" onClick={() => paginate(pageNumbers[pageNumbers.length - 2])} href="!#">
                                     {pageNumbers[pageNumbers.length - 2]}
                         </button>
-                        <button type="button" key={pageNumbers[pageNumbers.length - 1]} class="pageitem" onClick={() => paginate(pageNumbers[pageNumbers.length - 1])} href="!#">
+                        <button type="button" key={pageNumbers[pageNumbers.length - 1]} className="pageitem" onClick={() => paginate(pageNumbers[pageNumbers.length - 1])} href="!#">
                                     {pageNumbers[pageNumbers.length - 1]}
                         </button>
     
                         {currentPage != pageNumbers[pageNumbers.length - 1] &&
-                            <button type="button" class="pageitem" onClick={() => paginate(currentPage + 1)}>
+                            <button type="button" className="pageitem" onClick={() => paginate(currentPage + 1)}>
                             next
                             </button>
                         } 
@@ -144,30 +144,30 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
         if (currentPage > pageNumbers.length - 6) {
             return (
                 <nav>
-                    <div class="pagination">
+                    <div className="pagination">
                         {currentPage > 1 &&
-                            <button type="button" class="pageitem" onClick={() => paginate(currentPage - 1)}>
+                            <button type="button" className="pageitem" onClick={() => paginate(currentPage - 1)}>
                             previous
                             </button>
                         }
 
-                        <button type="button" key={pageNumbers[0]} class="pageitem" onClick={() => paginate(pageNumbers[0])} href="!#">
+                        <button type="button" key={pageNumbers[0]} className="pageitem" onClick={() => paginate(pageNumbers[0])} href="!#">
                         {pageNumbers[0]}
                         </button>
-                        <button type="button" key={pageNumbers[1]} class="pageitem" onClick={() => paginate(pageNumbers[1])} href="!#">
+                        <button type="button" key={pageNumbers[1]} className="pageitem" onClick={() => paginate(pageNumbers[1])} href="!#">
                         {pageNumbers[1]}
                         </button>
 
                         <div>...</div>
     
                         {displayNumbers.map(number => (
-                            <button type="button" key={number} class="pageitem" onClick={() => paginate(number)} href="!#">
+                            <button type="button" key={number} className="pageitem" onClick={() => paginate(number)} href="!#">
                                     {number}
                             </button>
                         ))}
     
                         {currentPage != pageNumbers[pageNumbers.length - 1] &&
-                            <button type="button" class="pageitem" onClick={() => paginate(currentPage + 1)}>
+                            <button type="button" className="pageitem" onClick={() => paginate(currentPage + 1)}>
                             next
                             </button>
                         } 
