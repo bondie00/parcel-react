@@ -29,6 +29,8 @@ body {
   height: fit-content;
   min-height: 100px;
   padding: .5em;
+  border-radius: 2px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
 }
 
 .filters {
@@ -115,12 +117,7 @@ h4 {
   display: flex;
   justify-content: center;
   gap: 6px;
-}
-
-.pageitem {
-  display: block;
-  font-size: 10pt;
-  padding: 5px 10px;
+  padding: 25 0 25 0;
 }
 
 .searchbar {
@@ -134,9 +131,63 @@ h4 {
   position: absolute;
   overflow: auto;
   background-color: white;
+  z-index: 2;
 }
 
 .searchdirectors {
   display: block;
 }
 
+.countries {
+  padding-left: 17px;
+}
+
+.pageitem {
+  background-color:white;
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  background-image: linear-gradient(-180deg, white, lightgray);
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",sans-serif;
+  font-size: 10pt;
+  line-height: 29px;
+  position: relative;
+  text-align: center;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: fit-content;
+  padding: 0px 10px 0px 10px;
+}
+
+.pageitem:focus {
+  border-color: #008296;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  outline: 2;
+}
+
+.filterTitle {
+  padding: 8px 0 8px 0;
+  border-bottom: 1px solid white;
+}
+
+.filters {
+  padding: 10px
+}
+
+.searchBar {
+  padding: 5 0 5 0;
+}
+
+.apply {
+  padding-top: 10px;
+  text-align: center;
+}
+
+#applybutton {
+  padding: 1 0 1 0;
+  background-color: red;
+  width: 75%
+}
