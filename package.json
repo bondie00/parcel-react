@@ -1,12 +1,13 @@
 {
   "name": "parcel-react",
   "version": "1.0.0",
-  "homepage" : "https://bondieoo.github.io/parcel-react"
+  "homepage" : "https://bondieoo.github.io/parcel-react",
   "license": "MIT",
   "scripts": {
+    "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "yarn parcel src/index.html"
+    "build": "react-scripts build"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
