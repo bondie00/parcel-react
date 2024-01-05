@@ -1,7 +1,6 @@
 {
   "name": "parcel-react",
   "version": "1.0.0",
-  "homepage" : "https://bondieoo.github.io/parcel-react",
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
