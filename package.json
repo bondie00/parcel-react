@@ -6,8 +6,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "yarn run",
-    "eject": "react-scripts eject"
+    "start": "yarn run"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
