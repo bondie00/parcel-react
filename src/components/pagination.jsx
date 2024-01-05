@@ -46,7 +46,7 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
                     }
                     
                     {pageNumbers.map(number => (
-                        <button type="button" key={number} className="pageitem" onClick={() => paginate(number)} href="!#">
+                        <button type="button" key={number} className="pageitem" id={(number == currentPage ? "selected" : null)} onClick={() => paginate(number)} href="!#">
                         {number}
                         </button>
                     ))}
@@ -73,7 +73,7 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
                         }
     
                         {displayNumbers.map(number => (
-                            <button type="button" key={number} className="pageitem" onClick={() => paginate(number)} href="!#">
+                            <button type="button" key={number} className="pageitem" id={(number == currentPage ? "selected" : null)} onClick={() => paginate(number)} href="!#">
                                     {number}
                             </button>
                         ))}
@@ -107,7 +107,7 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
                             </button>
                         }
                         
-                        <button type="button" key={pageNumbers[0]} className="pageitem" onClick={() => paginate(pageNumbers[0])} href="!#">
+                        <button type="button" key={pageNumbers[0]} className="pageitem"  onClick={() => paginate(pageNumbers[0])} href="!#">
                         {pageNumbers[0]}
                         </button>
                         <button type="button" key={pageNumbers[1]} className="pageitem" onClick={() => paginate(pageNumbers[1])} href="!#">
@@ -117,7 +117,7 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
                         <div>...</div>
     
                         {displayNumbers.map(number => (
-                            <button type="button" key={number} className="pageitem" onClick={() => paginate(number)} href="!#">
+                            <button type="button" key={number} className="pageitem" id={(number == currentPage ? "selected" : null)} onClick={() => paginate(number)} href="!#">
                                     {number}
                             </button>
                         ))}
@@ -161,7 +161,7 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
                         <div>...</div>
     
                         {displayNumbers.map(number => (
-                            <button type="button" key={number} className="pageitem" onClick={() => paginate(number)} href="!#">
+                            <button type="button" key={number} className="pageitem" id={(number == currentPage ? "selected" : null)} onClick={() => paginate(number)} href="!#">
                                     {number}
                             </button>
                         ))}

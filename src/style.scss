@@ -4,26 +4,27 @@ body {
 }
 
 .main {
-  padding-left: 6vw;
-  padding-right: 6vw;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 .workarea {
   display: flex;
   flex-direction: row;
   gap: 20px;
-  padding-left: 100px;
-  padding-right: 225px;
+  justify-content: center;
+  padding-right: 200px;
 }
 
 .films-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1;
+  
 }
 
 .movie {
+  min-width: 600px;
   border: 1px solid grey;
   display: block;
   height: fit-content;
@@ -33,8 +34,29 @@ body {
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
 }
 
+.leftpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pollscontainer {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  border: 1px solid darkgray;
+  background-color: lightgray;
+  justify-content: center;
+  align-items: center;
+}
+
+#poll {
+  padding: 10 10 10 10;
+}
+
 .filters {
-  width: 200px;
+  display:block;
+  min-width: 200px;
   height: fit-content;
   border: 1px solid darkgray;
   background-color: lightgray;
@@ -126,7 +148,8 @@ h4 {
 }
 
 .dropdown-content {
-  height: 120px;
+  height:fit-content;
+  max-height: 120px;
   width: 100%;
   position: absolute;
   overflow: auto;
@@ -134,7 +157,7 @@ h4 {
   z-index: 2;
 }
 
-.searchdirectors {
+.searchresults {
   display: block;
 }
 
@@ -143,10 +166,13 @@ h4 {
 }
 
 .pageitem {
-  background-color:white;
-  border: 1px solid darkgray;
-  border-radius: 4px;
-  background-image: linear-gradient(-180deg, white, lightgray);
+  background: #eee;
+  color: #444;
+  border: 1px solid #bbb;
+  border-bottom: 1px solid #aaa;
+  background-image: linear-gradient(#fff 2%,#ddd 95%,#bbb 100%);
+  border-radius: 0.25em;
+  box-shadow: none;
   box-sizing: border-box;
   color: #0f1111;
   cursor: pointer;
@@ -162,10 +188,19 @@ h4 {
   padding: 0px 10px 0px 10px;
 }
 
-.pageitem:focus {
-  border-color: #008296;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-  outline: 2;
+.pageitem:active {
+  color: #111;
+  background: #ccc;
+  border-color: #fff;
+  box-shadow: inset 1px 1px 3px #333;
+}
+
+#selected {
+  color: #111;
+  background: #ccc;
+  border-color: #fff;
+  box-shadow: inset 1px 1px 3px #333;
+
 }
 
 .filterTitle {
@@ -186,8 +221,6 @@ h4 {
   text-align: center;
 }
 
-#applybutton {
-  padding: 1 0 1 0;
-  background-color: red;
-  width: 75%
+#highlight {
+  color: green;
 }

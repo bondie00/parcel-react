@@ -2,127 +2,143 @@ import FilmSlide from "./components/FilmSlide"
 import React, { useState } from "react"
 import data from "./components/filmdata.json"
 import Pagination from "./components/pagination"
-import CountryFilters from "./components/CountryFilters"
-import SearchBar from "./components/SearchBar"
-import YearFilters from "./components/YearFilters"
+import Filters from "./components/Filters"
 
 
 export function App() {
   const [currentPage, setCurrentPage] = useState(1)
-  const [moviesperPage] = useState(25)
+  const [moviesperPage] = useState(20)
+  const [poll, setPoll] = useState("")
+  const [sort, setSort] = useState(["votes"])
   const [countryFilters, setCountryFilters] = useState([])
   const [yearFilters, setYearFilters] = useState([])
   const [directorFilters, setDirectorFilters] = useState([])
   const [titleFilters, setTitleFilters] = useState([])
-  const [clickedCOI, setClickedCOI] = useState(false)
-  const [clickedYears, setClickedYears] = useState(false)
-  const [clickedDirector, setClickedDirector] = useState(false)
-  const [clickedTitle, setClickedTitle] = useState(false)
-  const [apply, setApply] =useState(0)
-  const [startYear, setStartYear] = useState("1880")
-  const [endYear, setEndYear] = useState("2023")
-
-  let countries = countryFilters
-  let directors = directorFilters
-  let titles = titleFilters
+  const [prevStartYear, setPrevStartYear] = useState([])
+  const [prevEndYear, setPrevEndYear] = useState([])
 
   let nextState = {
     country: countryFilters,
-    years: yearFilters,
+    startYear: prevStartYear,
+    endYear: prevEndYear,
     DirectorArray: directorFilters,
-    TitleArray: titleFilters
+    TitleArray: titleFilters,
+    sortType: sort
   }
 
-  console.log(countryFilters)
+  console.log("director filters", directorFilters)
+  console.log("country filters", countryFilters)
+  console.log("year filters", yearFilters)
 
-  let filteredData = data.filter((node) => {
+
+  let yearData = data.filter((node) => {
+    if (poll == "")
+      return true
+    else if (node[poll] > 0)
+      return true
+  })
+
+
+  let filteredData = yearData.filter((node) => {
     let couFlag = false
     let decFlag = false
     let dirFlag = false
     let titFlag = false
 
-    countryFilters.some((filter) => {
-      if (node.CountryArray.includes(filter))
-        couFlag = true
-    })
-    if (node.Year >= yearFilters[0] && node.Year <= yearFilters[1])
-      decFlag = true
-    directorFilters.some((filter) => {
-      if (node.DirectorArray.includes(filter))
-        dirFlag = true
-    })
-    titleFilters.some((filter) => {
-      if (node.TitleArray.includes(filter))
-        titFlag = true
-    })
-
-    if (countryFilters.length > 0 && yearFilters.length > 0 && directorFilters.length > 0 && titleFilters.length > 0)
-      return (couFlag && decFlag && dirFlag && titFlag)
-    if (countryFilters.length > 0 && yearFilters.length > 0 && titleFilters.length > 0)
-      return (couFlag && decFlag && titFlag)
-    if (countryFilters.length > 0 && directorFilters.length > 0 && titleFilters.length > 0)
-      return (couFlag && dirFlag && titFlag)
-    if (yearFilters.length > 0 && directorFilters.length > 0 && titleFilters.length > 0)
-      return (decFlag && dirFlag && titFlag)
-    if (countryFilters.length > 0 && yearFilters.length > 0)
-      return (couFlag && decFlag)
-      if (countryFilters.length > 0 && directorFilters.length > 0)
-      return (couFlag && dirFlag)
-      if (countryFilters.length > 0 && titleFilters.length > 0)
-      return (couFlag && titFlag)
-      if (yearFilters.length > 0 && directorFilters.length > 0)
-      return (decFlag && dirFlag)
-      if (yearFilters.length > 0 && titleFilters.length > 0)
-      return (decFlag && titFlag)
-      if (titleFilters.length > 0 && directorFilters.length > 0)
-      return (titFlag && titFlag)
-    if (countryFilters.length > 0)
-      return couFlag
-    if (yearFilters.length > 0)
-      return decFlag
-    if (directorFilters.length > 0)
-      return dirFlag   
-    if (titleFilters.length > 0)
-      return titFlag 
+      countryFilters.some((filter) => {
+        if (node.CountryArray.includes(filter))
+          couFlag = true
+      })
+      if (node.Year >= yearFilters[0] && node.Year <= yearFilters[1])
+        decFlag = true
+      directorFilters.some((filter) => {
+        if (node.DirectorArray.includes(filter))
+          dirFlag = true
+      })
+      titleFilters.some((filter) => {
+        if (node.TitleArray.includes(filter))
+          titFlag = true
+      })
+  
+      if (countryFilters.length > 0 && yearFilters.length > 0 && directorFilters.length > 0 && titleFilters.length > 0)
+        return (couFlag && decFlag && dirFlag && titFlag)
+      if (countryFilters.length > 0 && yearFilters.length > 0 && titleFilters.length > 0)
+        return (couFlag && decFlag && titFlag)
+      if (countryFilters.length > 0 && directorFilters.length > 0 && titleFilters.length > 0)
+        return (couFlag && dirFlag && titFlag)
+      if (yearFilters.length > 0 && directorFilters.length > 0 && titleFilters.length > 0)
+        return (decFlag && dirFlag && titFlag)
+      if (countryFilters.length > 0 && yearFilters.length > 0)
+        return (couFlag && decFlag)
+        if (countryFilters.length > 0 && directorFilters.length > 0)
+        return (couFlag && dirFlag)
+        if (countryFilters.length > 0 && titleFilters.length > 0)
+        return (couFlag && titFlag)
+        if (yearFilters.length > 0 && directorFilters.length > 0)
+        return (decFlag && dirFlag)
+        if (yearFilters.length > 0 && titleFilters.length > 0)
+        return (decFlag && titFlag)
+        if (titleFilters.length > 0 && directorFilters.length > 0)
+        return (titFlag && titFlag)
+      if (countryFilters.length > 0)
+        return couFlag
+      if (yearFilters.length > 0)
+        return decFlag
+      if (directorFilters.length > 0)
+        return dirFlag   
+      if (titleFilters.length > 0)
+        return titFlag 
     return data
 })
 
+if (sort == "votes") {
+  filteredData.sort((a,b) => {
+    if (poll=="") {
+      let totalVotesA = parseInt(a["2022votes"])+parseInt(a["2012votes"])+parseInt(a["2002votes"])+parseInt(a["1992votes"])+parseInt(a["1982votes"])+parseInt(a["1972votes"])+parseInt(a["1962votes"])+parseInt(a["1952votes"])
+      let totalVotesB = parseInt(b["2022votes"])+parseInt(b["2012votes"])+parseInt(b["2002votes"])+parseInt(b["1992votes"])+parseInt(b["1982votes"])+parseInt(b["1972votes"])+parseInt(b["1962votes"])+parseInt(b["1952votes"])
+      return totalVotesB - totalVotesA
+    }
+    return b[poll] - a[poll]
+  })
+
+  if (sort == "title") {
+    filteredData.sort((a,b) => {
+      return b["FilmTitle"] - a["FilmTitle"]
+    })
+  }
+}
+
 const applyClick = () => {
-  nextState.country = countries
-  nextState.years=[]
-  if (startYear == "")
-    nextState.years.push("1880")
+ 
+    setCountryFilters(nextState.country)
+
+  let years = []
+  if (nextState.startYear == null || nextState.startYear == "")
+    years.push("1880")
   else
-    nextState.years.push(startYear)
-  if (endYear == "")
-    nextState.years.push("2023")
+    years.push(nextState.startYear[0])
+  if (nextState.endYear == null || nextState.endYear == "")
+    years.push("2023")
   else
-    nextState.years.push(endYear)
-  nextState.DirectorArray = directors
-  nextState.TitleArray = titles
-  setCountryFilters(nextState.country)
-  setYearFilters(nextState.years)
+    years.push(nextState.endYear[0])
+
+  setYearFilters(years)
   setDirectorFilters(nextState.DirectorArray)
   setTitleFilters(nextState.TitleArray)
+  setSort(nextState.sortType)
   setCurrentPage(1)
-  setApply(apply + 1)
+  setPrevStartYear(nextState.startYear)
+  setPrevEndYear(nextState.endYear)
 }
 
-const toggleCountries = () => {
-  (clickedCOI === true ? setClickedCOI(false) : setClickedCOI(true))
+const applyPoll = (year) => {
+  setPoll(year)
+  setCurrentPage(1)
 }
 
-const toggleYears = () => {
-  (clickedYears === true ? setClickedYears(false) : setClickedYears(true))
-}
 
-const toggleDirector = () => {
-  (clickedDirector === true ? setClickedDirector(false) : setClickedDirector(true))
-}
-
-const toggleTitle = () => {
-  (clickedTitle === true ? setClickedTitle(false) : setClickedTitle(true))
-}
+console.log("nextState.sort", nextState.sortType)
+console.log("sort", sort)
 
 const indexLast = currentPage * moviesperPage
 const indexFirst = indexLast - moviesperPage
@@ -130,11 +146,13 @@ let indexCurrent = filteredData.slice(indexFirst, indexLast)
 
 const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
+
   return <>
       <header>
 
       </header>
       <div className="main">
+        <div>{indexFirst + 1} - {indexLast > filteredData.length ? filteredData.length : indexLast} out of {filteredData.length} films in {poll=="" ? "All Sight and Sound Polls" : null}</div>
 
         <Pagination 
           moviesperPage={moviesperPage} 
@@ -144,95 +162,46 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
         />
 
         <div className="workarea">
+          <div className="leftpanel">
+            <div className="pollscontainer">
+              <div type="button" className="pageitem" id={(poll == "" ? "selected" : null)} onClick={() => applyPoll("")}>All Films</div>
+              <div type="button" className="pageitem" id={(poll == "2022votes" ? "selected" : null)} onClick={() => applyPoll("2022votes")}>2022 Poll</div>
+              <div type="button" className="pageitem" id={(poll == "2012votes" ? "selected" : null)} onClick={() => applyPoll("2012votes")}>2012 Poll</div>
+              <div type="button" className="pageitem" id={(poll == "2002votes" ? "selected" : null)} onClick={() => applyPoll("2002votes")}>2002 Poll</div>
+              <div type="button" className="pageitem" id={(poll == "1992votes" ? "selected" : null)} onClick={() => applyPoll("1992votes")}>1992 Poll</div>
+              <div type="button" className="pageitem" id={(poll == "1982votes" ? "selected" : null)} onClick={() => applyPoll("1982votes")}>1982 Poll</div>
+              <div type="button" className="pageitem" id={(poll == "1972votes" ? "selected" : null)} onClick={() => applyPoll("1972votes")}>1972 Poll</div>
+              <div type="button" className="pageitem" id={(poll == "1962votes" ? "selected" : null)} onClick={() => applyPoll("1962votes")}>1962 Poll</div>
+              <div type="button" className="pageitem" id={(poll == "1952votes" ? "selected" : null)} onClick={() => applyPoll("1952votes")}>1952 Poll</div>
+          </div>
 
-          <div className="filters">
-            <div className="filterTitle" onClick={toggleCountries}>{clickedCOI ? '\u25B2' : '\u25BC'}<b>Country of Origin</b></div>
-              {clickedCOI ? (
-              <div>
-                <CountryFilters
-                countries={countries}
-                continent="North America"
-                code="NorthAmerica"
-                />
-
-                <CountryFilters
-                countries={countries}
-                continent="South America"
-                code="SouthAmerica"
-                />
-
-                <CountryFilters
-                countries={countries}
-                continent="Europe"
-                code="Europe"
-                />
-
-                <CountryFilters
-                countries={countries}
-                continent="Asia"
-                code="Asia"
-                />
-
-                <CountryFilters
-                countries={countries}
-                continent="Africa"
-                code="Africa"
-                />
-
-              <CountryFilters
-                countries={countries}
-                continent="Oceania"
-                code="Oceania"
-                />
-              </div>
-            ) : null}
-
-            <div className="filterTitle" onClick={toggleYears}>{clickedYears ? '\u25B2' : '\u25BC'}<b>Release Year</b></div>
-
-            {clickedYears ? (
-              <div>
-                <YearFilters
-                setStartYear={setStartYear}
-                setEndYear={setEndYear}
-                />
-              </div>
-
-            ) : null}
-            
+            <div className="filters">
 
 
-            <div className="filterTitle" onClick={toggleDirector}>{clickedDirector ? '\u25B2' : '\u25BC'}<b>Director</b></div>
-            {clickedDirector ? (
-              <SearchBar className="searchBar"
-              data={data}
-              directors={directors}
-              titles={titles}
-              type="director"
-              />
-            ) : null}
 
-          
-            <div className="filterTitle" onClick={toggleTitle}>{clickedTitle ? '\u25B2' : '\u25BC'}<b>Title</b></div>
-            {clickedTitle ? (
-              <SearchBar
-              data={data}
-              directors={directors}
-              titles={titles}
-              type="title"
-              />
-            ) : null}
-              
-            
-
+            <Filters 
+            data={data}
+            countries={nextState.country}
+            startYear={nextState.startYear}
+            endYear={nextState.endYear}
+            directors={nextState.DirectorArray}
+            titles={nextState.TitleArray}
+            sortType={nextState.sortType}
+            />
             <div className="apply">
-            <div type="button" id="applybutton" className="pageitem"  onClick={() => applyClick()}>Apply Filters</div>
+              <div type="button" className="pageitem"  onClick={() => applyClick()}>Apply Filters</div>
             </div>
+          </div>
+
+
+
           </div>
           
           <div className="films-container">
             {indexCurrent.map((d) => (
               <FilmSlide 
               d={d}
+              poll={poll}
               />
               ))}
           </div>

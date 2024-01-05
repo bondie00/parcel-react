@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 
-const YearFilters = ({setStartYear, setEndYear}) => {
+const YearFilters = ({startYear, endYear}) => {
+
+    const [apply, setApply] = useState([])
+    const [searchTerm, setSearchTerm] = useState("")
+    const [searchTerm2, setSearchTerm2] = useState("")
+
 
     const handleStart = (event) => {
-        setStartYear(event.target.value)           
+        setSearchTerm(event.target.value)
+        startYear.push(event.target.value)
+        startYear.splice(0, startYear.length - 1)
     }
 
     const handleEnd = (event) => {
-        setEndYear(event.target.value)
+        setSearchTerm2(event.target.value)
+        endYear.push(event.target.value)
+        endYear.splice(0, endYear.length - 1)
     }
 
 
@@ -15,11 +24,11 @@ return (
     <div>
         <div>From</div>
         <div>
-            <input type="text" placeholder="Starting year..." onChange={(e) => handleStart(e)}/>
+            <input type="text" placeholder="Starting year..." value={startYear} onChange={(e) => handleStart(e)}/>
         </div>
         <div>To</div>
         <div>
-            <input type="text" placeholder="Ending year..." onChange={(e) => handleEnd(e)}/>
+            <input type="text" placeholder="Ending year..." value={endYear} onChange={(e) => handleEnd(e)}/>
         </div>
     </div>
 

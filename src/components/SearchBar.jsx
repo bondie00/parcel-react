@@ -1,10 +1,10 @@
 import React, { useState } from "react"
+import Selection from "../components/Selection"
 
 const SearchBar = ({data, directors, titles, type}) => {
 
   const [clickedSearch, setClickedSearch] = useState(false)
   const [searchTerm, setSearchTerm] = useState([])
-  const [apply, setApply] = useState(0)
 
   const clickHandler = (event) => {
     event.preventDefault()
@@ -72,66 +72,62 @@ const SearchBar = ({data, directors, titles, type}) => {
     if (type == "title") {
       titles.push(event.target.getAttribute("name"))
       setSearchTerm("")
-    }
-    
-  }
-
-  const unselect = (event) => {
-    if (type == "director") {
-      directors.some((x) => {
-        if (event.target.getAttribute("name") == x) {
-            const index = directors.indexOf(x)
-            directors.splice(index, 1)
-        }})
-    setApply(apply + 1)
-    }
-
-    if (type == "title") {
-      titles.some((x) => {
-        if (event.target.getAttribute("name") == x) {
-            const index = titles.indexOf(x)
-            titles.splice(index, 1)
-        }})
-    setApply(apply + 1)
-    }
+    } 
   }
 
   return (
-    <div className="searchBar">
-      <div> 
-        {type=="director" ? (
+
+<div> 
+
+{type=="director" ? (
+    <div>
+    {directors.length > 0 ? (
           <div>
-          {directors.map((d) => (
-            <div>
-              <div onClick={(e) => unselect(e)} name={d}>{d}{'\u2A2F'}</div>
-            </div>
-              ))}
+            {directors.map((d) => (
+              <div>
+              <Selection
+                data={d}
+                directors={directors}
+                titles={titles}
+                type={type}
+              />
               </div>
+            ))}
+          </div>
+        ) : null}
+</div>
         ) : null}
 
 {type=="title" ? (
+    <div>
+    {titles.length > 0 ? (
           <div>
-          {titles.map((d) => (
-            <div>
-              <div onClick={(e) => unselect(e)} name={d}>{d}{'\u2A2F'}</div>
-            </div>
-              ))}
+            {titles.map((d) => (
+              <div>
+              <Selection
+                data={d}
+                directors={directors}
+                titles={titles}
+                type={type}
+              />
               </div>
+            ))}
+          </div>
         ) : null}
-        
-        </div>
+</div>
+        ) : null}
 
         <div className="searchbar" onClick={() => searchBarClick()}>
             <input type="text" placeholder="Search..." ref={ref} onChange={(e) => clickHandler(e)} value={searchTerm}/>
             {clickedSearch ? (
                 <div className="dropdown-content">
                 {menuArr.map((d) => (
-                    <div className="searchdirectors" onClick={(e) => select(e)} name={d}>{d}</div>
+                    <div className="searchresults" onClick={(e) => select(e)} name={d}>{d}</div>
                 ))}
             </div>
             ) : null} 
         </div>
-    </div>
+</div>
 
   )
 }

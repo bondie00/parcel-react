@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Filters = ({countries, continent, code}) => {
+const Filters = ({countries, prevCountries, continent, code}) => {
 
     const [show, setShow] = useState(false)
     const [selected, setSelected] = useState([])
@@ -21,48 +21,51 @@ const Filters = ({countries, continent, code}) => {
         if (event.target.checked) {
             setSelected([...selected, event.target.value])
             countries.push(event.target.value)
+
         } 
         else {
             setSelected(selected.filter((c) => c !== event.target.value))
             const index = countries.indexOf(event.target.value)
-            countries.splice(index, 1)
+            if (index >= 0)
+                countries.splice(index, 1)
+
         }
     } 
 
     const click = () => {
         (show === true ? setShow(false) : setShow(true))
-      }
+    }
 
-      const selectAll = (event) => {
+    const selectAll = (event) => {
         if (event.target.checked) {
             setSelected(Countries[code])
             Countries[code].map((x) => {
-                {countries.indexOf(x) == -1 ? countries.push((x)) : null}
-                
+                if (countries.indexOf(x) == -1) {
+                    countries.push((x))
+
+                }
             })
-           
         }
         else {
             setSelected([])
-            Countries[code].map((x) => {
+            Countries[code].forEach((x) => {
                 const index = countries.indexOf(x)
-                countries.splice(index, 1)
+                if (index >= 0)
+                    countries.splice(index, 1)
             })
         }
-      }
-
-
+    }
 
 return (
     <div className="filtersContainer">
             <div>
-                <input type="checkbox" name={continent} checked={selected.length === Countries[code].length} onChange={selectAll}/>
+                <input type="checkbox" name={continent} checked={Countries[code].every(c => countries.includes(c))} onChange={selectAll}/>
                 <label htmlFor={continent}><span onClick={click}>{continent}{show ? '\u25B4' : '\u25BE'}</span></label>
             </div>
             {show ? (
                 Countries[code].map((c) => (
                     <div className="countries">
-                        <input type="checkbox" value={c} checked={selected.includes(c)} onChange={countryHandler}/>
+                        <input type="checkbox" value={c} checked={countries.includes(c)} onChange={countryHandler}/>
                         <label htmlFor={c}>{c}</label>
                     </div>
                 ))
