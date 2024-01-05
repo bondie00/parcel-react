@@ -4,8 +4,8 @@
   "homepage" : "https://bondieoo.github.io/parcel-react"
   "license": "MIT",
   "scripts": {
-    "predeploy": "npm run build"
-    "deply": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "yarn parcel src/index.html"
   },
   "devDependencies": {
