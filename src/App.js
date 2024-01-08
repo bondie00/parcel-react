@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import data from "./components/filmdata.json"
 import Pagination from "./components/pagination"
 import Filters from "./components/Filters"
+import Header from "./components/Header"
 
 
 export function App() {
@@ -100,13 +101,27 @@ if (sort == "votes") {
     }
     return b[poll] - a[poll]
   })
+}
 
   if (sort == "title") {
     filteredData.sort((a,b) => {
       return b["FilmTitle"] - a["FilmTitle"]
     })
   }
-}
+
+  if (sort == "yearUp") {
+    filteredData.sort((a,b) => {
+      return a["Year"] - b["Year"]
+    })
+  }
+  
+  if (sort == "yearDown") {
+    filteredData.sort((a,b) => {
+      return b["Year"] - a["Year"]
+    })
+  }
+
+
 
 const applyClick = () => {
  
@@ -131,6 +146,7 @@ const applyClick = () => {
   setPrevEndYear(nextState.endYear)
 }
 
+
 const applyPoll = (year) => {
   setPoll(year)
   setCurrentPage(1)
@@ -148,11 +164,14 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
 
   return <>
-      <header>
 
-      </header>
-      <div className="main">
-        <div>{indexFirst + 1} - {indexLast > filteredData.length ? filteredData.length : indexLast} out of {filteredData.length} films in {poll=="" ? "All Sight and Sound Polls" : null}</div>
+        <Header/>
+
+        <div className="main">
+
+
+
+        <div className="results"><span className="resultsNums">{indexFirst + 1}</span> - <span className="resultsNums">{indexLast > filteredData.length ? filteredData.length : indexLast}</span> out of <span className="resultsNums">{filteredData.length}</span> films in {poll=="" ? "All Sight and Sound Polls" : "the " + poll.substring(0,4) + " Sight and Sound poll"}</div>
 
         <Pagination 
           moviesperPage={moviesperPage} 
@@ -164,20 +183,22 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
         <div className="workarea">
           <div className="leftpanel">
             <div className="pollscontainer">
-              <div type="button" className="pageitem" id={(poll == "" ? "selected" : null)} onClick={() => applyPoll("")}>All Films</div>
-              <div type="button" className="pageitem" id={(poll == "2022votes" ? "selected" : null)} onClick={() => applyPoll("2022votes")}>2022 Poll</div>
-              <div type="button" className="pageitem" id={(poll == "2012votes" ? "selected" : null)} onClick={() => applyPoll("2012votes")}>2012 Poll</div>
-              <div type="button" className="pageitem" id={(poll == "2002votes" ? "selected" : null)} onClick={() => applyPoll("2002votes")}>2002 Poll</div>
-              <div type="button" className="pageitem" id={(poll == "1992votes" ? "selected" : null)} onClick={() => applyPoll("1992votes")}>1992 Poll</div>
-              <div type="button" className="pageitem" id={(poll == "1982votes" ? "selected" : null)} onClick={() => applyPoll("1982votes")}>1982 Poll</div>
-              <div type="button" className="pageitem" id={(poll == "1972votes" ? "selected" : null)} onClick={() => applyPoll("1972votes")}>1972 Poll</div>
-              <div type="button" className="pageitem" id={(poll == "1962votes" ? "selected" : null)} onClick={() => applyPoll("1962votes")}>1962 Poll</div>
-              <div type="button" className="pageitem" id={(poll == "1952votes" ? "selected" : null)} onClick={() => applyPoll("1952votes")}>1952 Poll</div>
+              <div type="button" className="pollbutton" id={(poll == "" ? "selected" : null)} onClick={() => applyPoll("")}>All Films</div>
+              <div type="button" className="pollbutton" id={(poll == "2022votes" ? "selected" : null)} onClick={() => applyPoll("2022votes")}>2022 Poll</div>
+              <div type="button" className="pollbutton" id={(poll == "2012votes" ? "selected" : null)} onClick={() => applyPoll("2012votes")}>2012 Poll</div>
+              <div type="button" className="pollbutton" id={(poll == "2002votes" ? "selected" : null)} onClick={() => applyPoll("2002votes")}>2002 Poll</div>
+              <div type="button" className="pollbutton" id={(poll == "1992votes" ? "selected" : null)} onClick={() => applyPoll("1992votes")}>1992 Poll</div>
+              <div type="button" className="pollbutton" id={(poll == "1982votes" ? "selected" : null)} onClick={() => applyPoll("1982votes")}>1982 Poll</div>
+              <div type="button" className="pollbutton" id={(poll == "1972votes" ? "selected" : null)} onClick={() => applyPoll("1972votes")}>1972 Poll</div>
+              <div type="button" className="pollbutton" id={(poll == "1962votes" ? "selected" : null)} onClick={() => applyPoll("1962votes")}>1962 Poll</div>
+              <div type="button" className="pollbutton" id={(poll == "1952votes" ? "selected" : null)} onClick={() => applyPoll("1952votes")}>1952 Poll</div>
           </div>
 
             <div className="filters">
 
-
+            <div className="applytop">
+              <div type="button" className="pollbutton"  onClick={() => applyClick()}>Sort and Filter</div>
+            </div>
 
             <Filters 
             data={data}
@@ -188,9 +209,11 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
             titles={nextState.TitleArray}
             sortType={nextState.sortType}
             />
-            <div className="apply">
-              <div type="button" className="pageitem"  onClick={() => applyClick()}>Apply Filters</div>
+
+            <div className="applybottom">
+              <div type="button" className="pollbutton"  onClick={() => applyClick()}>Sort and Filter</div>
             </div>
+
           </div>
 
 

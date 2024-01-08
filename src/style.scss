@@ -24,7 +24,7 @@ body {
 }
 
 .movie {
-  min-width: 600px;
+  width: 550px;
   border: 1px solid grey;
   display: block;
   height: fit-content;
@@ -48,6 +48,36 @@ body {
   background-color: lightgray;
   justify-content: center;
   align-items: center;
+  padding: 15 10 10 15;
+
+}
+
+.pollbutton {
+  margin-bottom: 4px;
+  background: #eee;
+  color: #444;
+  border: 1px solid #bbb;
+  border-bottom: 1px solid #aaa;
+  background-image: linear-gradient(#fff 2%,#ddd 95%,#bbb 100%);
+  border-radius: 0.25em;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  height: fit-content;
+  width: 75px;
+  font-size: 10pt;
+  text-align: center;
+  width: 170px;
+  border-radius: 0px;
+  padding: 2 0 2 0;
+}
+
+.pollbutton:active {
+  color: #111;
+  background: #ccc;
+  border-color: #fff;
+  box-shadow: inset 1px 1px 3px #333;
 }
 
 #poll {
@@ -56,19 +86,14 @@ body {
 
 .filters {
   display:block;
-  min-width: 200px;
+  width: 175px;
   height: fit-content;
   border: 1px solid darkgray;
   background-color: lightgray;
 }
 
-h2,
-h4 {
-  margin: 0;
-}
-
 .rankgrid {
-  min-height: 50px;
+  height: fit-content;
   padding-top: 2em;
 }
 
@@ -81,27 +106,31 @@ h4 {
 
 .rank {
   flex-basis: 100%;
-  font-weight: bold;
-  font-size: 15;
+  font-size: 18;
+  text-align: center;
+  font-family: 'Impact';
 }
 
 
 .votes {
   flex-basis: 100%;
-  font-size: 13;
+  font-size: 11;
+  text-align: center;
 
 }
 
 
 .year {
   flex-basis: 100%;
-  font-size: 13;
+  font-size: 11;
+  text-align: center;
 }
 
 .pound {
   font-weight: normal;
-  font-size: 10;
-  padding-right: 1px;
+  font-family: 'Open Sans';
+  font-size: 13;
+  padding-right: 2px;
 }
 
 .title {
@@ -129,22 +158,18 @@ h4 {
   font-weight: normal;
 }
 
-.films {
-  flex: 1;
-
-}
-
 
 .pagination {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  padding: 25 0 25 0;
+  gap: 8px;
+  padding: 15 0 25 0;
 }
 
 .searchbar {
   position: relative;
   display: inline-block;
+  padding: 5 0 5 0;
 }
 
 .dropdown-content {
@@ -159,6 +184,7 @@ h4 {
 
 .searchresults {
   display: block;
+  cursor: pointer;
 }
 
 .countries {
@@ -177,9 +203,8 @@ h4 {
   color: #0f1111;
   cursor: pointer;
   display: inline-block;
-  font-family: "Amazon Ember",sans-serif;
   font-size: 10pt;
-  line-height: 29px;
+  height: 25px;
   position: relative;
   text-align: center;
   touch-action: manipulation;
@@ -204,23 +229,118 @@ h4 {
 }
 
 .filterTitle {
-  padding: 8px 0 8px 0;
-  border-bottom: 1px solid white;
+  font-size: 13px;
+  cursor: pointer;
 }
 
 .filters {
   padding: 10px
 }
 
-.searchBar {
-  padding: 5 0 5 0;
+.applytop {
+  text-align: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
-.apply {
-  padding-top: 10px;
+.applybottom {
   text-align: center;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
 #highlight {
   color: green;
 }
+
+.withClear {
+  padding: 16px 0 8px 0;
+  border-bottom: 1px solid white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sortTitle {
+  padding-bottom: 5px;
+  border-bottom: 1px solid white;
+}
+
+.sort {
+  width: 175px;
+  cursor: pointer;
+}
+
+.sortContainer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.clear {
+  font-size: 9pt;
+  text-decoration: underline;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.expandFilters {
+    border-bottom: 1px solid white;
+}
+
+.searchBarContainer {
+  padding-bottom: 5px;
+}
+
+.mainTitle {
+  font-size: 44pt;
+  font-family: 'Impact';
+  padding-bottom: 10px;
+}
+
+.headerContainer {
+  padding: 0 50 0 50;
+  border-bottom: 3.5px solid black;
+  padding-bottom: 10px;
+}
+
+.resultsNums {
+  font-family: 'Impact';
+  font-size: 14pt;
+}
+
+.results {
+  font-size: 12pt;
+  padding-left: 30px;
+  padding-top: 15px;
+}
+
+.headerSelectionContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.headerSelection {
+  border-bottom: 1.5px solid black;
+  font-size: 12pt;
+  cursor: pointer;
+
+}
+
+#headerSelected {
+  background: lightgray;
+}
+
+.information {
+  font-size: 12pt;
+  font-family: "Open Sans";
+}
+
+.infotext {
+  cursor: pointer;
+}
+
+.countrytext {
+  cursor: pointer;
+}
+

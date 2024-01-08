@@ -23,11 +23,11 @@ const YearFilters = ({startYear, endYear}) => {
 return (
     <div>
         <div>From</div>
-        <div>
+        <div className="searchBarContainer">
             <input type="text" placeholder="Starting year..." value={startYear} onChange={(e) => handleStart(e)}/>
         </div>
         <div>To</div>
-        <div>
+        <div className="searchBarContainer">
             <input type="text" placeholder="Ending year..." value={endYear} onChange={(e) => handleEnd(e)}/>
         </div>
     </div>

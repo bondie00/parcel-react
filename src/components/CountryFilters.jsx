@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Filters = ({countries, prevCountries, continent, code}) => {
+const Filters = ({countries, continent, code}) => {
 
     const [show, setShow] = useState(false)
     const [selected, setSelected] = useState([])
@@ -59,13 +59,13 @@ const Filters = ({countries, prevCountries, continent, code}) => {
 return (
     <div className="filtersContainer">
             <div>
-                <input type="checkbox" name={continent} checked={Countries[code].every(c => countries.includes(c))} onChange={selectAll}/>
-                <label htmlFor={continent}><span onClick={click}>{continent}{show ? '\u25B4' : '\u25BE'}</span></label>
+                <input type="checkbox" className="countrytext" name={continent} checked={Countries[code].every(c => countries.includes(c))} onChange={selectAll}/>
+                <label htmlFor={continent}><span className="countrytext" onClick={click}>{continent}{show ? '\u25B4' : '\u25BE'}</span></label>
             </div>
             {show ? (
                 Countries[code].map((c) => (
                     <div className="countries">
-                        <input type="checkbox" value={c} checked={countries.includes(c)} onChange={countryHandler}/>
+                        <input type="checkbox" className="countrytext" value={c} checked={countries.includes(c)} onChange={countryHandler}/>
                         <label htmlFor={c}>{c}</label>
                     </div>
                 ))

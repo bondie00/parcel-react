@@ -9,6 +9,7 @@ const Filters = ({data, countries, startYear, endYear, directors, titles, sortTy
   const [clickedYears, setClickedYears] = useState(false)
   const [clickedDirector, setClickedDirector] = useState(false)
   const [clickedTitle, setClickedTitle] = useState(false)
+  const [state, setState] = useState(0)
 
   const [sortSel, setSortSel] = useState("votes")
     
@@ -30,8 +31,22 @@ const toggleTitle = () => {
 const handleSort = (e) => {
   sortType.push(e.target.value)
   sortType.splice(0, sortType.length - 1)
-  //sortType = e.target.value
   setSortSel(e.target.value)
+}
+
+
+const clearFilters = (code) => {
+  if (code == "countries")
+    countries.splice(0, countries.length)
+  if (code == "year") {
+    startYear.splice(0, startYear.length)
+    endYear.splice(0, endYear.length)
+  }
+  if (code == "director")
+    directors.splice(0, directors.length)
+  if (code == "title")
+    titles.splice(0, titles.length)
+  setState(state + 1)
 }
 
   
@@ -39,19 +54,23 @@ const handleSort = (e) => {
   return (
     <div>
 
-<div className="filterTitle"><b>Sort by</b></div>
+<div className="sortTitle"><b>Sort by</b></div>
 
-<div>
+<div className= "sortContainer">
 <select className="sort" value={sortSel} onChange={(e) => handleSort(e)}>
         <option value="votes">Votes &#40;Highest to Lowest&#41;</option>
         <option value="title">Title &#40;A to Z&#41;</option>
+        <option value="yearUp">Release Year &#40;Earliest to Latest&#41;</option>
+        <option value="yearDown">Release Year &#40;Latest to Earliest&#41;</option>
 </select>
 </div>
 
-
+<div className="withClear">
         <div className="filterTitle" onClick={toggleCountries}>{clickedCOI ? '\u25B2' : '\u25BC'}<b>Country of Origin</b></div>
+        <div className="clear" onClick={() => clearFilters("countries")}>clear</div>
+        </div>
               {clickedCOI ? (
-              <div>
+              <div className="expandFilters">
                 <CountryFilters
                 countries={countries}
                 continent="North America"
@@ -90,10 +109,13 @@ const handleSort = (e) => {
               </div>
             ) : null}
 
-<div className="filterTitle" onClick={toggleYears}>{clickedYears ? '\u25B2' : '\u25BC'}<b>Release Year</b></div>
+<div className="withClear">
+  <div className="filterTitle" onClick={toggleYears}>{clickedYears ? '\u25B2' : '\u25BC'}<b>Release Year</b></div>
+  <div className="clear" onClick={() => clearFilters("year")}>clear</div>
+</div>
 
 {clickedYears ? (
-  <div>
+  <div className="expandFilters">
     <YearFilters
     startYear={startYear}
     endYear={endYear}
@@ -102,27 +124,35 @@ const handleSort = (e) => {
 
 ) : null}
 
-
-<div className="filterTitle" onClick={toggleDirector}>{clickedDirector ? '\u25B2' : '\u25BC'}<b>Director</b></div>
+<div className="withClear">
+  <div className="filterTitle" onClick={toggleDirector}>{clickedDirector ? '\u25B2' : '\u25BC'}<b>Director</b></div>
+  <div className="clear" onClick={() => clearFilters("director")}>clear</div>
+</div>
 
 {clickedDirector ? (
+  <div className="expandFilters">
   <SearchBar className="searchBar"
   data={data}
   directors={directors}
   titles={titles}
   type="director"
   />
+  </div>
 ) : null}
 
-
-<div className="filterTitle" onClick={toggleTitle}>{clickedTitle ? '\u25B2' : '\u25BC'}<b>Title</b></div>
+<div className="withClear">
+  <div className="filterTitle" onClick={toggleTitle}>{clickedTitle ? '\u25B2' : '\u25BC'}<b>Title</b></div>
+  <div className="clear" onClick={() => clearFilters("title")}>clear</div>
+</div>
 {clickedTitle ? (
+  <div className="expandFilters">
   <SearchBar className="searchBar"
   data={data}
   directors={directors}
   titles={titles}
   type="title"
   />
+  </div>
 ) : null}
   </div>
 
