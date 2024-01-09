@@ -6,8 +6,8 @@
   "scripts": {
     "start": "yarn parcel src/index.html",
     "build": "parcel build ./src/index.html --public-url ./",
-    "predeploy": "rm -rf dist/* && build",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+    "predeploy": "rm -rf dist/* && yarn build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
