@@ -6,7 +6,7 @@
   "scripts": {
     "start": "yarn parcel src/index.html",
     "build": "parcel build ./src/index.html --public-url ./",
-    "predeploy": "rm -rf dist && parcel build src/index.html --public-url 'https://github.com/bondie00/parcel-react'",
+    "predeploy": "rm -rf dist && parcel build src/index.html --public-url 'https://bondie00.github.io/parcel-react/'",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
