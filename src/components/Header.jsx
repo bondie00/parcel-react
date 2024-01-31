@@ -50,7 +50,7 @@ const Header = ({ }) => {
                 
                     {selection == "paper" ? (
                         <div className="information">
-                            <p>To read more about the project, <a target="_blank" href="https://drive.google.com/file/d/1YNqqAJQkz-secjsLRZtjAeHVvlPcICfZ/view?usp=sharing">click here.</a>
+                            <p>To read more about the project, <a target="_blank" href="https://drive.google.com/file/d/10AnOWrWEnIQEdqdLNfJuQLWSkYzHcMzv/view?usp=sharing">click here.</a>
                             </p>
 
                             <div className="infotext" onClick={toggleShow}>Click for less information <b>&#708;</b></div>
