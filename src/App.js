@@ -207,12 +207,18 @@ export function App() {
           </div>
           
           <div className="films-container">
-            {indexCurrent.map((d) => (
-              <FilmSlide 
-              d={d}
-              poll={poll}
-              />
-              ))}
+            {indexCurrent.length > 0 ? (
+              indexCurrent.map((d) => (
+                <FilmSlide 
+                d={d}
+                poll={poll}
+                />
+                ))
+            ) : 
+            <div className="movie">No results</div>}
+
+
+
           </div>
         </div>
 
