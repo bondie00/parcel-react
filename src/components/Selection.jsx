@@ -25,7 +25,7 @@ const Selection = ({data, directors, titles, type}) => {
   return (
     <div>
         {show ? (
-             <div onClick={(e) => unselect(e)} name={data}>{data}{'\u2A2F'}</div>
+             <div className="displayedSelection" onClick={(e) => unselect(e)} name={data}>{data}{'\u2A2F'}</div>
         ) : null}
   </div>
   )

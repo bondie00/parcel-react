@@ -172,8 +172,8 @@ body {
   .dropdown-content {
     height:fit-content;
     max-height: 120px;
+    position: relative;
     width: 100%;
-    position: absolute;
     overflow: auto;
     z-index: 2;
   }
@@ -346,6 +346,10 @@ body {
   }
   
   .countrytext {
+    cursor: pointer;
+  }
+
+  .displayedSelection {
     cursor: pointer;
   }
 
