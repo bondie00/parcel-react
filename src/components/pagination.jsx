@@ -178,4 +178,4 @@ const Pagination = ({moviesperPage, totalMovies, paginate, currentPage}) => {
     }
 }
 
-export default Pagination;
+export default Pagination

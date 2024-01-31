@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const YearFilters = ({startYear, endYear}) => {
 
-    const [apply, setApply] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
     const [searchTerm2, setSearchTerm2] = useState("")
 

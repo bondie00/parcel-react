@@ -18,6 +18,10 @@ export function App() {
   const [prevStartYear, setPrevStartYear] = useState([])
   const [prevEndYear, setPrevEndYear] = useState([])
 
+
+  const pollOptions = ["all", "2022votes", "2012votes", "2002votes", "1992votes", "1982votes", "1972votes", "1962votes", "1952votes"]
+  const pollText = ["All Films", "2022 Poll", "2012 Poll", "2002 Poll", "1992 Poll", "1982 Poll", "1972 Poll", "1962 Poll", "1952 Poll"]
+
   let nextState = {
     country: countryFilters,
     startYear: prevStartYear,
@@ -26,11 +30,6 @@ export function App() {
     TitleArray: titleFilters,
     sortType: sort
   }
-
-  console.log("director filters", directorFilters)
-  console.log("country filters", countryFilters)
-  console.log("year filters", yearFilters)
-
 
   let yearData = data.filter((node) => {
     if (poll == "")
@@ -46,16 +45,19 @@ export function App() {
     let dirFlag = false
     let titFlag = false
 
-      countryFilters.some((filter) => {
-        if (node.CountryArray.includes(filter))
-          couFlag = true
+    countryFilters.some((filter) => {
+      if (node.CountryArray.includes(filter))
+        couFlag = true
       })
+
       if (node.Year >= yearFilters[0] && node.Year <= yearFilters[1])
         decFlag = true
+
       directorFilters.some((filter) => {
         if (node.DirectorArray.includes(filter))
           dirFlag = true
       })
+
       titleFilters.some((filter) => {
         if (node.TitleArray.includes(filter))
           titFlag = true
@@ -90,18 +92,18 @@ export function App() {
       if (titleFilters.length > 0)
         return titFlag 
     return data
-})
-
-if (sort == "votes") {
-  filteredData.sort((a,b) => {
-    if (poll=="") {
-      let totalVotesA = parseInt(a["2022votes"])+parseInt(a["2012votes"])+parseInt(a["2002votes"])+parseInt(a["1992votes"])+parseInt(a["1982votes"])+parseInt(a["1972votes"])+parseInt(a["1962votes"])+parseInt(a["1952votes"])
-      let totalVotesB = parseInt(b["2022votes"])+parseInt(b["2012votes"])+parseInt(b["2002votes"])+parseInt(b["1992votes"])+parseInt(b["1982votes"])+parseInt(b["1972votes"])+parseInt(b["1962votes"])+parseInt(b["1952votes"])
-      return totalVotesB - totalVotesA
-    }
-    return b[poll] - a[poll]
   })
-}
+
+  if (sort == "votes") {
+    filteredData.sort((a,b) => {
+      if (poll=="") {
+        let totalVotesA = parseInt(a["2022votes"])+parseInt(a["2012votes"])+parseInt(a["2002votes"])+parseInt(a["1992votes"])+parseInt(a["1982votes"])+parseInt(a["1972votes"])+parseInt(a["1962votes"])+parseInt(a["1952votes"])
+        let totalVotesB = parseInt(b["2022votes"])+parseInt(b["2012votes"])+parseInt(b["2002votes"])+parseInt(b["1992votes"])+parseInt(b["1982votes"])+parseInt(b["1972votes"])+parseInt(b["1962votes"])+parseInt(b["1952votes"])
+        return totalVotesB - totalVotesA
+      }
+      return b[poll] - a[poll]
+    })
+  }
 
   if (sort == "title") {
     filteredData.sort((a,b) => {
@@ -121,57 +123,49 @@ if (sort == "votes") {
     })
   }
 
+  const applyClick = () => {
+    let years = []
+    if (nextState.startYear == null || nextState.startYear == "")
+      years.push("1880")
+    else
+      years.push(nextState.startYear[0])
+    if (nextState.endYear == null || nextState.endYear == "")
+      years.push("2023")
+    else
+      years.push(nextState.endYear[0])
 
-
-const applyClick = () => {
- 
+    setYearFilters(years)
     setCountryFilters(nextState.country)
+    setDirectorFilters(nextState.DirectorArray)
+    setTitleFilters(nextState.TitleArray)
+    setSort(nextState.sortType)
+    setCurrentPage(1)
+    setPrevStartYear(nextState.startYear)
+    setPrevEndYear(nextState.endYear)
+  }
 
-  let years = []
-  if (nextState.startYear == null || nextState.startYear == "")
-    years.push("1880")
-  else
-    years.push(nextState.startYear[0])
-  if (nextState.endYear == null || nextState.endYear == "")
-    years.push("2023")
-  else
-    years.push(nextState.endYear[0])
+  const applyPoll = (year) => {
+    if (year == "all") {
+      setPoll("")
+      setCurrentPage(1)
+    }
+    else {
+      setPoll(year)
+      setCurrentPage(1)
+    }
+  }
 
-  setYearFilters(years)
-  setDirectorFilters(nextState.DirectorArray)
-  setTitleFilters(nextState.TitleArray)
-  setSort(nextState.sortType)
-  setCurrentPage(1)
-  setPrevStartYear(nextState.startYear)
-  setPrevEndYear(nextState.endYear)
-}
+  const indexLast = currentPage * moviesperPage
+  const indexFirst = indexLast - moviesperPage
+  let indexCurrent = filteredData.slice(indexFirst, indexLast)
 
-
-const applyPoll = (year) => {
-  setPoll(year)
-  setCurrentPage(1)
-}
-
-
-console.log("nextState.sort", nextState.sortType)
-console.log("sort", sort)
-
-const indexLast = currentPage * moviesperPage
-const indexFirst = indexLast - moviesperPage
-let indexCurrent = filteredData.slice(indexFirst, indexLast)
-
-const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return <>
 
         <Header/>
 
         <div className="main">
-
-
-
-        <div className="results"><span className="resultsNums">{indexFirst + 1}</span> - <span className="resultsNums">{indexLast > filteredData.length ? filteredData.length : indexLast}</span> out of <span className="resultsNums">{filteredData.length}</span> films in {poll=="" ? "All Sight and Sound Polls" : "the " + poll.substring(0,4) + " Sight and Sound poll"}</div>
 
         <Pagination 
           moviesperPage={moviesperPage} 
@@ -180,44 +174,36 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
           currentPage={currentPage}
         />
 
+        <div className="results"><span className="resultsNums">{indexFirst + 1}</span> - <span className="resultsNums">{indexLast > filteredData.length ? filteredData.length : indexLast}</span> out of <span className="resultsNums">{filteredData.length}</span> films in {poll=="" ? "All Sight and Sound Polls" : "the " + poll.substring(0,4) + " Sight and Sound poll"}</div>
+
         <div className="workarea">
           <div className="leftpanel">
             <div className="pollscontainer">
-              <div type="button" className="pollbutton" id={(poll == "" ? "selected" : null)} onClick={() => applyPoll("")}>All Films</div>
-              <div type="button" className="pollbutton" id={(poll == "2022votes" ? "selected" : null)} onClick={() => applyPoll("2022votes")}>2022 Poll</div>
-              <div type="button" className="pollbutton" id={(poll == "2012votes" ? "selected" : null)} onClick={() => applyPoll("2012votes")}>2012 Poll</div>
-              <div type="button" className="pollbutton" id={(poll == "2002votes" ? "selected" : null)} onClick={() => applyPoll("2002votes")}>2002 Poll</div>
-              <div type="button" className="pollbutton" id={(poll == "1992votes" ? "selected" : null)} onClick={() => applyPoll("1992votes")}>1992 Poll</div>
-              <div type="button" className="pollbutton" id={(poll == "1982votes" ? "selected" : null)} onClick={() => applyPoll("1982votes")}>1982 Poll</div>
-              <div type="button" className="pollbutton" id={(poll == "1972votes" ? "selected" : null)} onClick={() => applyPoll("1972votes")}>1972 Poll</div>
-              <div type="button" className="pollbutton" id={(poll == "1962votes" ? "selected" : null)} onClick={() => applyPoll("1962votes")}>1962 Poll</div>
-              <div type="button" className="pollbutton" id={(poll == "1952votes" ? "selected" : null)} onClick={() => applyPoll("1952votes")}>1952 Poll</div>
-          </div>
+              {pollOptions.map((x, i) => (
+                <div type="button" className="pollbutton" id={(poll == {x} ? "selected" : null)} onClick={() => applyPoll(x)}>{pollText[i]}</div>
+                ))
+              }
+            </div>
 
             <div className="filters">
+              <div className="applytop">
+                <div type="button" className="pollbutton"  onClick={() => applyClick()}>Apply</div>
+              </div>
 
-            <div className="applytop">
-              <div type="button" className="pollbutton"  onClick={() => applyClick()}>Sort and Filter</div>
+              <Filters 
+              data={data}
+              countries={nextState.country}
+              startYear={nextState.startYear}
+              endYear={nextState.endYear}
+              directors={nextState.DirectorArray}
+              titles={nextState.TitleArray}
+              sortType={nextState.sortType}
+              />
+
+              <div className="applybottom">
+                <div type="button" className="pollbutton"  onClick={() => applyClick()}>Apply</div>
+              </div>
             </div>
-
-            <Filters 
-            data={data}
-            countries={nextState.country}
-            startYear={nextState.startYear}
-            endYear={nextState.endYear}
-            directors={nextState.DirectorArray}
-            titles={nextState.TitleArray}
-            sortType={nextState.sortType}
-            />
-
-            <div className="applybottom">
-              <div type="button" className="pollbutton"  onClick={() => applyClick()}>Sort and Filter</div>
-            </div>
-
-          </div>
-
-
-
           </div>
           
           <div className="films-container">
@@ -238,8 +224,5 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
         />
 
       </div>
-      <footer>
-        
-      </footer>
     </>
 }
