@@ -65,6 +65,7 @@ body {
     width: 100%;
     border-radius: 0px;
     padding: 3 0 3 0;
+    touch-action: manipulation;
   }
   
   .pollbutton:active {
@@ -225,7 +226,6 @@ body {
     background: #ccc;
     border-color: #fff;
     box-shadow: inset 1px 1px 3px #333;
-  
   }
   
   .filterTitle {

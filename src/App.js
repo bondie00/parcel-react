@@ -19,7 +19,7 @@ export function App() {
   const [prevEndYear, setPrevEndYear] = useState([])
 
 
-  const pollOptions = ["all", "2022votes", "2012votes", "2002votes", "1992votes", "1982votes", "1972votes", "1962votes", "1952votes"]
+  const pollOptions = ["", "2022votes", "2012votes", "2002votes", "1992votes", "1982votes", "1972votes", "1962votes", "1952votes"]
   const pollText = ["All Films", "2022 Poll", "2012 Poll", "2002 Poll", "1992 Poll", "1982 Poll", "1972 Poll", "1962 Poll", "1952 Poll"]
 
   let nextState = {
@@ -145,7 +145,7 @@ export function App() {
   }
 
   const applyPoll = (year) => {
-    if (year == "all") {
+    if (year == "") {
       setPoll("")
       setCurrentPage(1)
     }
@@ -180,7 +180,7 @@ export function App() {
           <div className="leftpanel">
             <div className="pollscontainer">
               {pollOptions.map((x, i) => (
-                <div type="button" className="pollbutton" id={(poll == {x} ? "selected" : null)} onClick={() => applyPoll(x)}>{pollText[i]}</div>
+                <div type="button" className="pollbutton" id={(poll == pollOptions[i] ? "selected" : null)} onClick={() => applyPoll(x)}>{pollText[i]}</div>
                 ))
               }
             </div>
