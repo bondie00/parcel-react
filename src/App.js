@@ -107,7 +107,11 @@ export function App() {
 
   if (sort == "title") {
     filteredData.sort((a,b) => {
-      return b["FilmTitle"] - a["FilmTitle"]
+      if (a["FilmTitle"].toUpperCase() < b["FilmTitle"].toUpperCase())
+        return -1
+      if (a["FilmTitle"].toUpperCase() > b["FilmTitle"].toUpperCase())
+        return 1
+      return 0
     })
   }
 
@@ -160,6 +164,8 @@ export function App() {
   let indexCurrent = filteredData.slice(indexFirst, indexLast)
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
+  console.log(filteredData)
 
   return <>
 
