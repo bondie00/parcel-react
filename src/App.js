@@ -5,6 +5,7 @@ import Pagination from "./components/pagination"
 import Filters from "./components/Filters"
 import Header from "./components/Header"
 
+import 'c3/c3.css';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -62,7 +63,7 @@ export function App() {
         if (node.TitleArray.includes(filter))
           titFlag = true
       })
-  
+
       if (countryFilters.length > 0 && yearFilters.length > 0 && directorFilters.length > 0 && titleFilters.length > 0)
         return (couFlag && decFlag && dirFlag && titFlag)
       if (countryFilters.length > 0 && yearFilters.length > 0 && titleFilters.length > 0)
@@ -88,9 +89,9 @@ export function App() {
       if (yearFilters.length > 0)
         return decFlag
       if (directorFilters.length > 0)
-        return dirFlag   
+        return dirFlag
       if (titleFilters.length > 0)
-        return titFlag 
+        return titFlag
     return data
   })
 
@@ -120,7 +121,7 @@ export function App() {
       return a["Year"] - b["Year"]
     })
   }
-  
+
   if (sort == "yearDown") {
     filteredData.sort((a,b) => {
       return b["Year"] - a["Year"]
@@ -173,9 +174,9 @@ export function App() {
 
         <div className="main">
 
-        <Pagination 
-          moviesperPage={moviesperPage} 
-          totalMovies={filteredData.length} 
+        <Pagination
+          moviesperPage={moviesperPage}
+          totalMovies={filteredData.length}
           paginate={paginate}
           currentPage={currentPage}
         />
@@ -196,7 +197,7 @@ export function App() {
                 <div type="button" className="pollbutton"  onClick={() => applyClick()}>Apply</div>
               </div>
 
-              <Filters 
+              <Filters
               data={data}
               countries={nextState.country}
               startYear={nextState.startYear}
@@ -211,16 +212,16 @@ export function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="films-container">
             {indexCurrent.length > 0 ? (
               indexCurrent.map((d) => (
-                <FilmSlide 
+                <FilmSlide
                 d={d}
                 poll={poll}
                 />
                 ))
-            ) : 
+            ) :
             <div className="movie">No results</div>}
 
 
@@ -228,9 +229,9 @@ export function App() {
           </div>
         </div>
 
-        <Pagination 
-          moviesperPage={moviesperPage} 
-          totalMovies={filteredData.length} 
+        <Pagination
+          moviesperPage={moviesperPage}
+          totalMovies={filteredData.length}
           paginate={paginate}
           currentPage={currentPage}
         />
